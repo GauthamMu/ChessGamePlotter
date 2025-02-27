@@ -3,7 +3,8 @@
 # And yes, this includes writing "White resigns" or "Black resigns". Seriously, just write 1-0 or 0-1.
 # This program intentionally does not support extra features like PGN parsing or commentary.
 # However, it probably will be able to export the moves in PGN format.
-# Also, this is no chess engine, so keep your long algebraics out of here, as this tool only supports moves up to 10 chars long.
+# Also, this is no chess engine, so keep your long algebraics out of here
+# This tool won't support moves longer than 10 chars long.
 # Wkr, GM
 
 # Fancy intro message, probably not needed (Nvm it is, to get the user's language code)
@@ -162,7 +163,8 @@ def pawnMoveValidation(move):
 				else:
 					# Not a regular capture
 					if chessBoard[8 - int(move[1])][fileToIndex[move[0]]] in [wSqr, bSqr]:
-						# Checking if the square in front of the desired square is a white pawn, which it is unless initial two-square advance
+						# Checking if the square in front of the desired square is a white pawn
+						# Which it is unless initial two-square advance
 						if chessBoard[9 - int(move[1])][fileToIndex[move[0]]] == wp:
 							# Using the new executeMove function
 							executeMove(
@@ -393,12 +395,11 @@ def kingMoveValidation(move):
 		pass
 
 
-# Will be useful when tackling pawn captures and piece moves, which can happen from multiple squares, unlike regular pawn moves
+# Will be useful when tackling pawn captures and piece moves, which can happen from multiple squares
+# Unlike regular pawn moves which can only happen from one
 possibleOriginSquares = []
 
 # To validate the input as a whole
-
-
 def moveValidation(move):
 	if len(move) < 2:  # Return early if move is too short
 		print("Your move is too short. Please use regular algebraic notation.")
@@ -408,8 +409,8 @@ def moveValidation(move):
 							Please use + for checks, regardless of what kind, and # for checkmates, also regardless of what kind.")
 		return "too long"
 
-	if len(move) == 2:  # Validate if the move is a valid chess square if it is 2 characters long (only fits a square, therefore a pawn move)
-		pawnMoveValidation(move)
+	if len(move) == 2:  # Validate if the move is a valid chess square if it is 2 characters long
+		pawnMoveValidation(move) # Only fits a square, therefore a pawn move
 	elif len(move) == 3:  # piece move (Nf3), pawn capture (xd5), pawn check (d6+), pawn mate (g5#) or kingside castling (0-0)
 		if move[0] in ["N", "B", "R", "Q", "K"]:  # Possible pieces
 			if move[0] == "R":
@@ -437,7 +438,9 @@ def moveValidation(move):
 				queenMoveValidation(move)
 			elif move[0] == "K":
 				kingMoveValidation(move)
-	elif len(move) == 5:  # queenside castling (0-0-0), ICCF pawn promotion (47481) check with capture (Rxb1+) or checkmate with capture (Rdxe1#)
+		elif move[0] in ["1", "2", "3", "4", "5", "6", "7", "8"]: # ICCF notation
+			pass
+	elif len(move) == 5:  # queenside castling (0-0-0), ICCF pawn promotion (47481), check with capture (Rxb1+) or checkmate with capture (Rdxe1#)
 		pass
 	elif len(move) == 6:
 		pass
