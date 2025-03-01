@@ -30,7 +30,6 @@ Not implemented yet, I'll do that though.
 
 ```
 ChessGamePlotter.py
-test.py
 ```
 
 ### Key Components
