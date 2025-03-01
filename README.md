@@ -36,7 +36,6 @@ test.py
 ### Key Components
 
 - `ChessGamePlotter.py`- The app. Did I mention that you have to run it in the terminal?
-- `test.py`- Don't mind him, he's just drunk.
 
 ## Performance Considerations
 
